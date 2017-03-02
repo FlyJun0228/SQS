@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1">
+<TableRow>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="姓名"/>
+    <EditText
+        android:hint="请输入姓名"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/edit_name"/>
+</TableRow>
+    <TableRow>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="编号"/>
+        <EditText
+            android:inputType="number"
+            android:hint="请输入编号"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/edit_code"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="年龄"/>
+        <EditText
+            android:inputType="number"
+            android:hint="请输入年龄"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/edit_age"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="性别"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroupSex"
+            android:orientation="horizontal"
+            >
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="男"
+                android:id="@+id/radioGroupSex_man"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="女"
+                android:id="@+id/radioGroupSex_woman"/>
+        </RadioGroup>
+    </TableRow>
+</TableLayout>
