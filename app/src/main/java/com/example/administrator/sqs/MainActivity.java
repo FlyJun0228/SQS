@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener, ListView.OnItemClickListener {
 
     private Button mAddBtn;
     private ListView listView;
@@ -50,6 +51,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         persons = personDao.getAllPerson();
         sqsAdapter = new SqsAdapter(this, persons);
         listView.setAdapter(sqsAdapter);
+        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -61,6 +63,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        // TODO 点击每一条Item后弹出AlertDialog，可选择修改或者删除该条记录
+        // Test
+        Toast.makeText(getApplicationContext(), "小帅哥点击了Item！", Toast.LENGTH_SHORT).show();
     }
 
     private void addPerson() {
