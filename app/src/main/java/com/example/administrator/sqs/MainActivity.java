@@ -26,13 +26,10 @@ import java.util.Map;
 public class MainActivity extends Activity implements View.OnClickListener {
 
     private Button mAddBtn;
-    private Button mUpdateBtn;
-    private Button mDelBtn;
     private ListView listView;
     private List<Person> persons;
     private PersonDao personDao;
     private SqsAdapter sqsAdapter;
-    private HashMap<String, Boolean> radioStates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +48,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mAddBtn.setOnClickListener(this);
         personDao = new PersonDao(this);
         persons = personDao.getAllPerson();
-        sqsAdapter = new SqsAdapter(this, radioStates, persons);
+        sqsAdapter = new SqsAdapter(this, persons);
         listView.setAdapter(sqsAdapter);
     }
 
