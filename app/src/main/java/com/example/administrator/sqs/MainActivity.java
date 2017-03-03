@@ -50,6 +50,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void initListener() {
+        mAddBtn.setOnClickListener(this);
+        mUpdateBtn.setOnClickListener(this);
+        mDelBtn.setOnClickListener(this);
         personDao2 = new PersonDao(this);
         persons = personDao2.getAllPerson();
         sqsAdapter = new SqsAdapter(this, radioStates, persons);
@@ -73,7 +76,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public void addPerson() {
+    private void addPerson() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("新增用户").create();
         View childView = getLayoutInflater().inflate(R.layout.alert, null);
@@ -137,7 +140,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         builder.show();
     }
 
-    public void deletePerson() {
+    private void deletePerson() {
         int position = -1;
         for (int i = 0; i < listView.getChildCount(); i++) {
             View childView = listView.getChildAt(i);
