@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private Button mDelBtn;
     private ListView listView;
     private List<Person> persons;
-    private PersonDao personDao2;
+    private PersonDao personDao;
     private SqsAdapter sqsAdapter;
     private HashMap<String, Boolean> radioStates;
 
@@ -44,17 +44,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void initView() {
         mAddBtn = (Button) findViewById(R.id.add);
-        mUpdateBtn = (Button) findViewById(R.id.update);
-        mDelBtn = (Button) findViewById(R.id.delete);
         listView = (ListView) findViewById(R.id.listview);
     }
 
     private void initListener() {
         mAddBtn.setOnClickListener(this);
-        mUpdateBtn.setOnClickListener(this);
-        mDelBtn.setOnClickListener(this);
-        personDao2 = new PersonDao(this);
-        persons = personDao2.getAllPerson();
+        personDao = new PersonDao(this);
+        persons = personDao.getAllPerson();
         sqsAdapter = new SqsAdapter(this, radioStates, persons);
         listView.setAdapter(sqsAdapter);
     }
@@ -64,12 +60,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.add:
                 addPerson();
-                break;
-            case R.id.update:
-                // TODO
-                break;
-            case R.id.delete:
-                deletePerson();
                 break;
             default:
                 break;
@@ -84,26 +74,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Field filed = null;
-                try {
-                    filed = dialogInterface.getClass().getSuperclass().getDeclaredField("mShowing");
-                    filed.setAccessible(true);
-                    filed.set(dialogInterface, true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
             }
         });
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 try {
-                    Field filed = dialogInterface.getClass().getSuperclass().getDeclaredField("mShowing");
-                    filed.setAccessible(true);
-                    filed.set(dialogInterface, false);
-                    AlertDialog ad;
                     if (dialogInterface instanceof AlertDialog) {
-                        ad = (AlertDialog) dialogInterface;
+                        AlertDialog ad = (AlertDialog) dialogInterface;
                         EditText editTextname = (EditText) ad.findViewById(R.id.edit_name);
                         EditText editTextcode = (EditText) ad.findViewById(R.id.edit_code);
                         EditText editTextage = (EditText) ad.findViewById(R.id.edit_age);
@@ -126,11 +105,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         person.setCode(editTextname.getText().toString());
                         RadioButton radioButton = (RadioButton) radioGroupSex.findViewById(radioGroupSex.getCheckedRadioButtonId());
                         person.setSex(radioButton.getText().toString());
-                        personDao2.addPerson(person);
-                        persons = personDao2.getAllPerson();
-                        radioStates = new HashMap<String, Boolean>();
+                        personDao.addPerson(person);
+                        List<Person> newPersons;
+                        // list新的引向
+                        newPersons = personDao.getAllPerson();
+                        persons.clear();
+                        persons.addAll(newPersons);
                         sqsAdapter.notifyDataSetChanged();
-                        filed.set(dialogInterface, true);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -138,27 +119,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         });
         builder.show();
-    }
-
-    private void deletePerson() {
-        int position = -1;
-        for (int i = 0; i < listView.getChildCount(); i++) {
-            View childView = listView.getChildAt(i);
-            RadioButton radioButton = (RadioButton) childView.findViewById(R.id.radioButton);
-            if (radioButton.isChecked()) {
-                position = i;
-                break;
-            }
-        }
-        if (position != -1) {
-            Person person = persons.get(position);
-            personDao2.deletePerson(person);
-            persons = personDao2.getAllPerson();
-            radioStates = new HashMap<String, Boolean>();
-            sqsAdapter.notifyDataSetChanged();
-        } else {
-            Toast.makeText(this, "请选择要删除的行", Toast.LENGTH_SHORT);
-        }
     }
 
 }

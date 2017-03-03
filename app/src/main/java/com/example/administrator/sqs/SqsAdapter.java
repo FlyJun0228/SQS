@@ -47,41 +47,33 @@ public class SqsAdapter extends BaseAdapter {
         return position;
     }
 
+    public static final class ViewHolder {
+        public TextView mName;
+        public TextView mSex;
+        public TextView mAge;
+        public TextView mCode;
+    }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        convertView = mInflater.inflate(R.layout.listview, null);
-        TextView textViewname = (TextView) convertView.findViewById(R.id.text_name);
-        TextView textViewsex = (TextView) convertView.findViewById(R.id.text_sex);
-        TextView textViewcode = (TextView) convertView.findViewById(R.id.text_code);
-        TextView textViewage = (TextView) convertView.findViewById(R.id.text_age);
-        final Person person = (Person) getItem(position);
-        textViewname.setText(person.getName());
-        textViewage.setText(person.getAge() + "");
-        textViewsex.setText(person.getSex());
-        textViewcode.setText(person.getCode());
-        RadioButton radioButton = (RadioButton) convertView.findViewById(R.id.radioButton);
-        radioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view instanceof RadioButton) {
-                    RadioButton radioButton = (RadioButton) view;
-                    if (radioButton.isChecked()) {
-                        radioStates.put(String.valueOf(position), true);
-                        for (String key : radioStates.keySet()) {
-                            if (!key.equals(String.valueOf(position))) {
-                                radioStates.put(key, false);
-                            }
-                        }
-                        notifyDataSetChanged();
-                    }
-                }
-            }
-        });
-        Boolean tempState = radioStates.get(String.valueOf(position));
-        if (tempState != null && tempState) {
-            radioButton.setChecked(false);
-            convertView.setBackgroundColor(Color.WHITE);
+        ViewHolder holder = null;
+        if (convertView == null) {
+            convertView = mInflater.inflate(R.layout.listview, null);
+            holder = new ViewHolder();
+            holder.mName = (TextView) convertView.findViewById(R.id.text_name);
+            holder.mSex = (TextView) convertView.findViewById(R.id.text_sex);
+            holder.mAge = (TextView) convertView.findViewById(R.id.text_code);
+            holder.mCode = (TextView) convertView.findViewById(R.id.text_age);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
+
+        holder.mName.setText("姓名：" + persons.get(position).getName());
+        holder.mSex.setText("年龄：" + persons.get(position).getAge());
+        holder.mAge.setText("性别：" + persons.get(position).getSex());
+        holder.mCode.setText("编号：" + persons.get(position).getCode());
+
         return convertView;
     }
 
