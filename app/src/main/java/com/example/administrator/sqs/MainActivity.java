@@ -2,27 +2,16 @@ package com.example.administrator.sqs;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends Activity implements View.OnClickListener, ListView.OnItemClickListener {
 
@@ -89,28 +78,17 @@ public class MainActivity extends Activity implements View.OnClickListener, List
                 try {
                     if (dialogInterface instanceof AlertDialog) {
                         AlertDialog ad = (AlertDialog) dialogInterface;
-                        EditText editTextname = (EditText) ad.findViewById(R.id.edit_name);
-                        EditText editTextcode = (EditText) ad.findViewById(R.id.edit_code);
-                        EditText editTextage = (EditText) ad.findViewById(R.id.edit_age);
-                        RadioGroup radioGroupSex = (RadioGroup) ad.findViewById(R.id.radioGroupSex);
-                        if (TextUtils.isEmpty(editTextname.getText().toString())) {
-                            Toast.makeText(MainActivity.this, "姓名不能为空", Toast.LENGTH_SHORT);
-                            return;
-                        }
-                        if (TextUtils.isEmpty(editTextcode.getText().toString())) {
-                            Toast.makeText(MainActivity.this, "编号不能为空", Toast.LENGTH_SHORT);
-                            return;
-                        }
-                        if (TextUtils.isEmpty(editTextage.getText().toString())) {
-                            Toast.makeText(MainActivity.this, "年龄不能为空", Toast.LENGTH_SHORT);
-                            return;
-                        }
+                        EditText editTextName = (EditText) ad.findViewById(R.id.edit_name);
+                        EditText editTextMajor = (EditText) ad.findViewById(R.id.edit_major);
+                        EditText editTextGender = (EditText) ad.findViewById(R.id.edit_gender);
+                        EditText editTextInterest = (EditText) ad.findViewById(R.id.edit_interest);
+                        EditText editTextCollect = (EditText) ad.findViewById(R.id.edit_collect);
                         Person person = new Person();
-                        person.setAge(Integer.parseInt(editTextage.getText().toString()));
-                        person.setName(editTextname.getText().toString());
-                        person.setCode(editTextname.getText().toString());
-                        RadioButton radioButton = (RadioButton) radioGroupSex.findViewById(radioGroupSex.getCheckedRadioButtonId());
-                        person.setSex(radioButton.getText().toString());
+                        person.setName(editTextName.getText().toString());
+                        person.setMajor(editTextMajor.getText().toString());
+                        person.setGender(editTextGender.getText().toString());
+                        person.setInterest(editTextInterest.getText().toString());
+                        person.setCollect(editTextCollect.getText().toString());
                         personDao.addPerson(person);
                         List<Person> newPersons;
                         // list新的引向

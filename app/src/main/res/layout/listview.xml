@@ -17,7 +17,7 @@
         android:text="姓名" />
 
     <TextView
-        android:id="@+id/text_code"
+        android:id="@+id/text_major"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
@@ -26,10 +26,10 @@
         android:background="#E5E5E5"
         android:textStyle="bold"
         android:textSize="12sp"
-        android:text="编号" />
+        android:text="专业" />
 
     <TextView
-        android:id="@+id/text_age"
+        android:id="@+id/text_gender"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
@@ -38,10 +38,10 @@
         android:background="#D1D1D1"
         android:textStyle="bold"
         android:textSize="12sp"
-        android:text="年龄" />
+        android:text="性别" />
 
     <TextView
-        android:id="@+id/text_sex"
+        android:id="@+id/text_interest"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
@@ -50,5 +50,17 @@
         android:background="#E5E5E5"
         android:textStyle="bold"
         android:textSize="12sp"
-        android:text="性别" />
+        android:text="兴趣" />
+
+    <TextView
+        android:id="@+id/text_collect"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="#D1D1D1"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:text="评论数" />
 </LinearLayout>

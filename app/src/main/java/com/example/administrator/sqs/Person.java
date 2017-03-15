@@ -8,30 +8,23 @@ import java.io.Serializable;
 
 public class Person implements Serializable {
 
-    private int age;
     private int _id;
     private String name;
-    private String code;
-    private String sex;
-    private String first_letter;
+    private String major;
+    private String gender;
+    private String interest;
+    private String collect;
 
     public Person() {
 
     }
 
-    public Person(String name, int age, String sex, String code) {
+    public Person(String name, String major, String gender, String interest, String collect) {
         this.name = name;
-        this.age = age;
-        this.sex = sex;
-        this.code = code;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+        this.major = major;
+        this.gender = gender;
+        this.interest = interest;
+        this.collect = collect;
     }
 
     public int get_id() {
@@ -50,27 +43,35 @@ public class Person implements Serializable {
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
+    public String getMajor() {
+        return major;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setMajor(String major) {
+        this.major = major;
     }
 
-    public String getSex() {
-        return sex;
+    public String getGender() {
+        return gender;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getFirst_letter() {
-        return first_letter;
+    public String getInterest() {
+        return interest;
     }
 
-    public void setFirst_letter(String first_letter) {
-        this.first_letter = first_letter;
+    public void setInterest(String interest) {
+        this.interest = interest;
+    }
+
+    public String getCollect() {
+        return collect;
+    }
+
+    public void setCollect(String collect) {
+        this.collect = collect;
     }
 }

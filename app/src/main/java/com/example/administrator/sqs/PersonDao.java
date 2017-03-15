@@ -23,13 +23,13 @@ public class PersonDao {
     }
 
     public void addPerson(Person person) {
-        Log.e("ddd", person.getName());
         SQLiteDatabase db = sqLiteHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", person.getName());
-        contentValues.put("age", person.getAge());
-        contentValues.put("sex", person.getSex());
-        contentValues.put("code", person.getCode());
+        contentValues.put("major_name", person.getMajor());
+        contentValues.put("user_name", person.getName());
+        contentValues.put("gender", person.getGender());
+        contentValues.put("interests", person.getInterest());
+        contentValues.put("collect", person.getCollect());
         db.insert("person", "_id", contentValues);
     }
 
@@ -41,10 +41,11 @@ public class PersonDao {
     public void updatePerson(Person person) {
         SQLiteDatabase db = sqLiteHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", person.getName());
-        contentValues.put("age", person.getAge());
-        contentValues.put("sex", person.getSex());
-        contentValues.put("code", person.getCode());
+        contentValues.put("major_name", person.getMajor());
+        contentValues.put("user_name", person.getName());
+        contentValues.put("gender", person.getGender());
+        contentValues.put("interests", person.getInterest());
+        contentValues.put("collect", person.getCollect());
         db.update("person", contentValues, "id=?", new String[]{String.valueOf(person.get_id())});
     }
 
@@ -53,12 +54,13 @@ public class PersonDao {
         SQLiteDatabase db = sqLiteHelper.getWritableDatabase();
         Cursor cursor = db.query("person", null, null, null, null, null, null);
         while (cursor.moveToNext()) {
-            String name = cursor.getString(cursor.getColumnIndex("name"));
-            String sex = cursor.getString(cursor.getColumnIndex("sex"));
-            int age = cursor.getInt(cursor.getColumnIndex("age"));
-            String code = cursor.getString(cursor.getColumnIndex("code"));
+            String major = cursor.getString(cursor.getColumnIndex("major_name"));
+            String name = cursor.getString(cursor.getColumnIndex("user_name"));
+            String gender = cursor.getString(cursor.getColumnIndex("gender"));
+            String interest = cursor.getString(cursor.getColumnIndex("interests"));
+            String collect = cursor.getString(cursor.getColumnIndex("collect"));
             int _id = cursor.getInt(cursor.getColumnIndex("_id"));
-            Person person = new Person(name, age, sex, code);
+            Person person = new Person(name, major, gender, interest, collect);
             person.set_id(_id);
             persons.add(person);
 

@@ -28,7 +28,11 @@ public class SqsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return persons.size();
+        if(persons != null) {
+            return persons.size();
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -43,9 +47,10 @@ public class SqsAdapter extends BaseAdapter {
 
     public static final class ViewHolder {
         public TextView mName;
-        public TextView mSex;
-        public TextView mAge;
-        public TextView mCode;
+        public TextView mMajor;
+        public TextView mGender;
+        public TextView mInterest;
+        public TextView mCollect;
     }
 
     @Override
@@ -55,18 +60,20 @@ public class SqsAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.listview, null);
             holder = new ViewHolder();
             holder.mName = (TextView) convertView.findViewById(R.id.text_name);
-            holder.mSex = (TextView) convertView.findViewById(R.id.text_sex);
-            holder.mAge = (TextView) convertView.findViewById(R.id.text_code);
-            holder.mCode = (TextView) convertView.findViewById(R.id.text_age);
+            holder.mMajor = (TextView) convertView.findViewById(R.id.text_major);
+            holder.mGender = (TextView) convertView.findViewById(R.id.text_gender);
+            holder.mInterest = (TextView) convertView.findViewById(R.id.text_interest);
+            holder.mCollect = (TextView) convertView.findViewById(R.id.text_collect);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.mName.setText("姓名：" + persons.get(position).getName());
-        holder.mSex.setText("年龄：" + persons.get(position).getAge());
-        holder.mAge.setText("性别：" + persons.get(position).getSex());
-        holder.mCode.setText("编号：" + persons.get(position).getCode());
+        holder.mName.setText(persons.get(position).getName());
+        holder.mMajor.setText(persons.get(position).getMajor());
+        holder.mGender.setText(persons.get(position).getGender());
+        holder.mInterest.setText(persons.get(position).getInterest());
+        holder.mCollect.setText(persons.get(position).getCollect());
 
         return convertView;
     }

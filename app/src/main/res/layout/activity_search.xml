@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.administrator.sqs.MainActivity">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/add"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Add 添加学生信息" />
+            android:text="关键字"/>
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+        <Button
+            android:id="@+id/btn_recommend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="推 荐"/>
+        <Button
+            android:id="@+id/btn_viewall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看全部"/>
     </LinearLayout>
 
     <LinearLayout
@@ -81,4 +91,5 @@
         android:layout_marginTop="10dp"
         android:dividerHeight="10dp"
         android:divider="#ffffff"/>
+
 </LinearLayout>
