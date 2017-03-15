@@ -62,5 +62,5 @@
         android:background="#D1D1D1"
         android:textStyle="bold"
         android:textSize="12sp"
-        android:text="评论数" />
+        android:text="学号" />
 </LinearLayout>
